@@ -4,14 +4,14 @@
 //
 //  Created by Anket Kohak on 05/01/25.
 //
-
+// MARK: - ViewModel
 import SwiftUI
  
-class EmojiMemoryGame{
-   static  let emojis =  ["👻","🎃","🕷️"," 😈","💀","🕸️","🧙‍♀️","🙀","👹","😱","☠️","🍭"]
+class EmojiMemoryGame:ObservableObject{
+   static  let emojis =  ["👻","🎃","🕷️","😈","💀","🕸️","🧙‍♀️","🙀","👹","😱","☠️","🍭"]
     
    static func creataMemoryGame()->MemoryGame<String>{
-       return MemoryGame(numberOfPairsOfCards: 4) { pairIndex  in
+       return MemoryGame(numberOfPairsOfCards: 16) { pairIndex  in
            if emojis.indices.contains(pairIndex){
                return emojis[pairIndex]
            }
@@ -21,14 +21,20 @@ class EmojiMemoryGame{
         }
     }
     
-    
-    private var model = creataMemoryGame()
+    @Published private var model = creataMemoryGame()
     
     var cards : Array<MemoryGame<String>.Card>{
         return model.cards
     }
+    
+    // MARK: - Intents
+    
+    func shuffle(){
+        model.shuffle()
+        objectWillChange.send()
+    }
     func choose(_ card: MemoryGame<String>.Card){
-        model.choose(card: card)
+        model.choose(card)
     }
     
 }

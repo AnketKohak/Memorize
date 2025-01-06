@@ -4,7 +4,7 @@
 //
 //  Created by Anket Kohak on 05/01/25.
 //
-
+// MARK: - Model 
 import Foundation
 
 
@@ -21,12 +21,16 @@ struct MemoryGame<CardContent> {
             cards.append(Card(content: content))
         }
     }
-    func choose(card:Card){
+    func choose(_ card:Card){
         
+    }
+    mutating func shuffle(){
+        cards.shuffle()
+        print(cards)
     }
     
     struct Card{
-        var isFaceUp = false
+        var isFaceUp = true
         var isMatched = false
         var content: CardContent
     }
