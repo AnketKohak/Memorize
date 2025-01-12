@@ -1,1 +1,1 @@
-<description>This is mini game <\description>
+<description>This is mini game </description>
